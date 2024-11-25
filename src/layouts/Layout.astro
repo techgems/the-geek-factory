@@ -1,0 +1,40 @@
+---
+import Header from '../components/Header.astro';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="bg-neutral-900">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="The Geek Factory es una tienda de productos personalizados en 3D." />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root {
+		--accent: 250, 0, 0;
+		--accent-light: 224, 224, 224;
+		--accent-dark: 200, 10, 10;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 80%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+	}
+</style>

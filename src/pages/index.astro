@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="The Geek Factory">
+	<main>
+		<h1 class="text-4xl text-center my-8">
+			Bienvenido a <span class="text-gradient bg-gradient-to-r from-red-600 to-white font-bold">The Geek Factory</span>
+		</h1>
+		<div class="w-4/6 mx-auto">
+			<p class="text-center mb-6">
+				¿Eres un verdadero fanático de los videojuegos y la cultura geek? Entonces has llegado al lugar indicado. En nuestra tienda, encontrarás una amplia selección de productos que te van a encantar.
+			</p>
+			<p class="text-center mb-6">
+				Desde artículos de Mario hasta accesorios para consolas de juegos, figuras de Pokémon, cartas del juego de cartas coleccionables de Pokémon, merchandising de Zelda y productos de Star Wars, ¡tenemos todo lo que necesitas para alimentar tu pasión geek!
+			</p>
+			<p class="text-center mb-12">
+				Sumérgete en un mundo de aventuras y nostalgia con nuestros productos de alta calidad, todos ellos cuidadosamente diseñados y fabricados con la última tecnología de impresión 3D.
+			</p>
+		</div>
+
+		<hr />
+		<h1 class="text-4xl text-center font-bold my-8">
+			<span class="text-gradient bg-gradient-to-r from-white to-red-600">Productos Destacados</span>
+		</h1>
+
+		<div class="grid grid-cols-3">
+			<Card
+				href="/pokemon-tcg"
+				title="Pokemon TCG"
+				body="Cajas para deck, marcadores de estado y más."
+			/>
+			<Card
+				href="/pokemon"
+				title="Figuras Pokemon"
+				body="Figuras de Pokemon de tamaño a su gusto."
+			/>
+			<Card
+				href="/consola"
+				title="Consolas"
+				body="Accesorios para Nintendo Switch, PS5, Xbox y más."
+			/>
+			{/* 
+			<Card
+				href="/star-wars"
+				title="Star Wars"
+				body="Figuras, Sables de Luz y otros."
+			/>
+			<Card
+				href="/mario"
+				title="Mario"
+				body="Accesorios de Mario y derivados."
+			/>
+			<Card
+				href="/zelda"
+				title="The Legend of Zelda"
+				body="Decoraciones de escritorio unicas."
+			/>
+			*/}
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 1200px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.text-gradient {
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+</style>
