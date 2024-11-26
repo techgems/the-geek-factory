@@ -1,7 +1,12 @@
 ---
-import { imageConfig } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 
+const supporterImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Supporter/*.png');
+const abilityImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Ability/*.png');
+const vStarImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/V Star/*.png');
+const otherImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Other/*.png');
 
 const supporterUsedList = [
     {
@@ -655,7 +660,11 @@ const otherList = [
             <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
                 {abilityUsedList.map((ability) => (
                     <div>
-                        <img class="h-auto max-w-full rounded-lg hover:scale-150 hover:drop-shadow-2xl" src={ability.image} alt={ability.name}>
+                        <Image 
+                            src={abilityImages[ability.image]()} 
+                            alt={ability.name} 
+                            class="h-auto max-w-full rounded-lg hover:scale-150 hover:drop-shadow-2xl"
+                        />
                     </div>
                 ))}
                 
@@ -668,7 +677,11 @@ const otherList = [
             <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
                 {supporterUsedList.map((supporter) => (
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src={supporter.image} alt={supporter.name}>
+                        <Image 
+                            src={supporterImages[supporter.image]()} 
+                            alt={supporter.name} 
+                            class="h-auto max-w-full rounded-lg hover:scale-150 hover:drop-shadow-2xl"
+                        />
                     </div>
                 ))}
             </div>
@@ -682,7 +695,11 @@ const otherList = [
             <div class="grid grid-cols-3 md:grid-cols-4 gap-4">
                 {vStarList.map((vStar) => (
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src={vStar.image} alt={vStar.name}>
+                        <Image 
+                            src={vStarImages[vStar.image]()} 
+                            alt={vStar.name} 
+                            class="h-auto max-w-full rounded-lg hover:scale-150 hover:drop-shadow-2xl"
+                        />
                     </div>
                 ))}
             </div>
@@ -696,7 +713,11 @@ const otherList = [
             <div class="grid grid-cols-3 md:grid-cols-4 gap-4">
                 {otherList.map((other) => (
                     <div>
-                        <img class="h-auto max-w-full rounded-lg" src={other.image} alt={other.name}>
+                        <Image 
+                            src={otherImages[other.image]()} 
+                            alt={other.name} 
+                            class="h-auto max-w-full rounded-lg hover:scale-150 hover:drop-shadow-2xl"
+                        />
                     </div>
                 ))}
             </div>
