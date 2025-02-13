@@ -637,7 +637,25 @@ const otherList = [
     },
 ]
 
+
+
+
 ---
+
+<script>
+    const sendToWhatsapp = () => {
+        const message = "Hola, me gustaria hacer una orden de productos de Pokemon TCG. Los productos que me interesan son: ";
+        const url = `https://wa.me/50660115102?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    const testSelectorResults = document.querySelectorAll('[data-test-wa-me]');
+
+    testSelectorResults.forEach((element) => {
+        element.addEventListener('click', sendToWhatsapp);
+    });
+
+</script>
 
 <Layout title="The Geek Factory">
 
@@ -664,6 +682,7 @@ const otherList = [
                             src={abilityImages[ability.image]()} 
                             alt={ability.name} 
                             class="h-auto max-w-full rounded-lg md:hover:scale-125 hover:scale-110 hover:drop-shadow-2xl"
+                            data-test-wa-me
                         />
                     </div>
                 ))}
