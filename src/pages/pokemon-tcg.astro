@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+import Test from '../components/Test.svelte';
 
-const supporterImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Supporter/*.png');
+const supporterImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Supporter/*.png', { eager: true });
 const abilityImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Ability/*.png');
 const vStarImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/V Star/*.png');
 const otherImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pokemon-tcg/Other/*.png');
@@ -643,8 +644,35 @@ const otherList = [
 ---
 
 <script>
+    let wishlistArray: { imageLink: string }[] = [];
+
+    const addToWishlist = (element: Element) => {
+        const imageSrc = element.getAttribute('src');
+        const imageLink = `${window.location.origin}${imageSrc}`;
+        
+        const elementIndex = wishlistArray.findIndex((item) => item.imageLink === imageLink);
+        
+        if(elementIndex === -1) { 
+            wishlistArray.push({ imageLink });
+        }
+        else {
+            wishlistArray.splice(elementIndex, 1);
+        }
+
+        document.querySelectorAll('[data-wishlist-count]')[0].textContent = wishlistArray.length.toString();
+    }
+
+    const constructWhatsappMessage = () => {
+        let message = "Hola, me gustaria hacer una orden de productos de TCG. Los productos que me interesan son: \n";
+        wishlistArray.forEach((item, index) => {
+            message += `${index + 1}. ${item.imageLink}\n`;
+        });
+
+        return message;
+    }
+
     const sendToWhatsapp = () => {
-        const message = "Hola, me gustaria hacer una orden de productos de Pokemon TCG. Los productos que me interesan son: ";
+        const message = constructWhatsappMessage();
         const url = `https://wa.me/50660115102?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     }
@@ -652,7 +680,7 @@ const otherList = [
     const testSelectorResults = document.querySelectorAll('[data-test-wa-me]');
 
     testSelectorResults.forEach((element) => {
-        element.addEventListener('click', sendToWhatsapp);
+        element.addEventListener('click', () => { addToWishlist(element) });
     });
 
 </script>
@@ -675,18 +703,18 @@ const otherList = [
         <div class="my-8 flex flex-col mx-auto">
             <h2 class="text-4xl text-center mb-8 text-white">Ability</h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {abilityUsedList.map((ability) => (
-                    <div>
-                        <Image 
-                            src={abilityImages[ability.image]()} 
-                            alt={ability.name} 
-                            class="h-auto max-w-full rounded-lg md:hover:scale-125 hover:scale-110 hover:drop-shadow-2xl"
-                            data-test-wa-me
-                        />
-                    </div>
-                ))}
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-10">
                 
+                <Test />
+
+                {abilityUsedList.map((ability) => (
+                    <Image 
+                        src={abilityImages[ability.image]()} 
+                        alt="Ability Coin"
+                        class="mx-auto h-auto w-4/5 md:w-full rounded-lg md:hover:scale-125 hover:scale-110"
+                        data-test-wa-me
+                    />
+                ))}
             </div>
         </div>
 
@@ -715,7 +743,7 @@ const otherList = [
                 {supporterUsedList.map((supporter) => (
                     <div>
                         <Image 
-                            src={supporterImages[supporter.image]()} 
+                            src={supporterImages[supporter.image].default} 
                             alt={supporter.name} 
                             class="h-auto max-w-full rounded-lg md:hover:scale-125 hover:scale-110 md:hover:drop-shadow-2xl"
                         />
@@ -742,5 +770,16 @@ const otherList = [
             </div>
         </div>
     </div>
+    <footer class="bg-black text-white p-4 sticky bottom-0 w-full flex justify-between">
+        <div class="bg-red-600 px-3 rounded-lg text-white flex font-semibold">
+            <span class="my-auto">
+                Diseños Seleccionados: <i data-wishlist-count>0</i>
+            </span>
+        </div>
+        <button class="bg-red-600 p-3 rounded-lg text-white hover:bg-red-700">
+            <span class="my-auto font-semibold">Iniciar Pedido</span>
+            <img class="mt-2 h-8 mx-auto" src="/whatsapp.svg" alt="Order Now">
+        </button>
+    </footer>
 
 </Layout>
