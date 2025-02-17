@@ -8,9 +8,9 @@
     }
 
     const constructWhatsappMessage = () => {
-        let message = "Hola, me gustaria hacer una orden de productos de TCG. Los productos que me interesan son: \n";
+        let message = "Hola, me gustaria hacer una orden de productos de TCG. Los productos que me interesan son: \n\n";
         wishlistState.forEach((item, index) => {
-            message += `${index + 1}. ${constructImageLink(item.image)}\n`;
+            message += `${index + 1}. ${constructImageLink(item.image)}\n\n`;
         });
 
         return message;
@@ -24,7 +24,7 @@
 </script>
 
 
-<footer class="bg-black text-white p-4 sticky bottom-0 w-full flex justify-between">
+<footer class={`bg-black text-white p-4 sticky bottom-0 w-full flex justify-between`}>
     <div class="bg-red-600 px-3 rounded-lg text-white flex font-semibold">
         <span class="my-auto">
             Diseños Seleccionados: <i>{wishlistStateLength}</i>

@@ -11,8 +11,6 @@
   }
 
   let { imageList, assetList, isVStar = false }: Props = $props();
-  
-  $inspect(wishlistState);
 
   const onImageClick = (token: PokemonTcgImage) => {
     const imageIndex = wishlistState.findIndex((item) => item.image === token.image);
