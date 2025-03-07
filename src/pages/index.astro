@@ -8,7 +8,7 @@ import Card from '../components/Card.astro';
 		<h1 class="text-4xl text-center my-8">
 			Bienvenido a <span class="text-gradient bg-gradient-to-r from-red-600 to-white font-bold">The Geek Factory</span>
 		</h1>
-		<div class="w-4/6 mx-auto">
+		<div class="md:w-4/6 w-full mx-auto">
 			<p class="text-center mb-6">
 				¿Eres un verdadero fanático de los videojuegos y la cultura geek? Entonces has llegado al lugar indicado. En nuestra tienda, encontrarás una amplia selección de productos que te van a encantar.
 			</p>
@@ -25,7 +25,7 @@ import Card from '../components/Card.astro';
 			<span class="text-gradient bg-gradient-to-r from-white to-red-600">Productos Destacados</span>
 		</h1>
 
-		<div class="grid grid-cols-3">
+		<div class="grid md:grid-cols-3 grid-cols-1">
 			<Card
 				href="/pokemon-tcg"
 				title="Pokemon TCG"
