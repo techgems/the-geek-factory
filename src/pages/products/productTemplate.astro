@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Header from '../../components/Header.astro';
 import "../../styles/global.css";
 
@@ -22,7 +23,7 @@ const { title, description, price, image } = Astro.props;
 		<Header />
         <main class="grid grid-cols-1 md:grid-cols-2 mx-8 md:mx-36 mt-4 md:mt-8 gap-4 md:gap-12">
             <div>
-                <img src={image} alt={title} class="ml-auto w-full md:w-2/3 rounded-2 rounded-lg shadow-lg" loading="lazy" />
+                <Image src={image} alt={title} class="ml-auto w-full md:w-2/3 rounded-2 rounded-lg shadow-lg" />
             </div>
             <div>
                 <h2 class="text-4xl font-bold my-8">

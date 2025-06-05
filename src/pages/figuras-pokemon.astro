@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 
 // Fetch all products from the 'pokemon-figurines' collection
@@ -13,11 +14,10 @@ const products = await getCollection('products');
                 <article class="w-full max-w-xs sm:w-52 text-center flex flex-col items-center">
                     <a href={`/products/${product.slug}/`} class="block w-full">
                         {product.data.image && (
-                            <img 
+                            <Image 
                                 src={product.data.image} 
                                 alt={product.data.title || product.slug} 
                                 class="w-full h-auto rounded-lg shadow-md object-cover"
-                                loading="lazy"
                             />
                         )}
                         <h2 class="text-base font-semibold mt-2 mb-0">
