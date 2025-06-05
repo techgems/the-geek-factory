@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Header from '../../components/Header.astro';
+import "./src/styles/global.css";
+
+type Props = CollectionEntry<'products'>['data'];
+
+const { title, description, price, image } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="bg-neutral-900">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header />
+        <main class="grid grid-cols-1 md:grid-cols-2 mx-8 md:mx-36 mt-4 md:mt-8 gap-4 md:gap-12">
+            <div>
+                <img src={image} alt={title} class="ml-auto w-full md:w-2/3 rounded-2 rounded-lg shadow-lg" loading="lazy" />
+            </div>
+            <div>
+                <h2 class="text-4xl font-bold my-8">
+                    <span class="text-gradient bg-gradient-to-r from-white to-red-600">{title}</span> 
+                </h2>
+                <p class="text-xl font-semibold text-red-500">{description}</p>
+
+				<div class="my-8">
+					<slot />
+				</div>
+
+                <p class="font-semibold text-xl mt-8">₡ {price}</p>
+
+                <button class="rounded-md font-semibold bg-red-600 py-3 px-5 mt-8  hover:bg-red-700 transition duration-300 ease-in-out">
+                    Contactar por Whatsapp
+                </button>
+            </div>
+        </main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--accent: 250, 0, 0;
+		--accent-light: 224, 224, 224;
+		--accent-dark: 200, 10, 10;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 80%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+	}
+    main {
+		max-width: calc(100% - 2rem);
+		color: white;
+	}
+	.text-gradient {
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+</style>

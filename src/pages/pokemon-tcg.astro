@@ -43,12 +43,6 @@ const otherImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/po
         return message;
     }
 
-    const sendToWhatsapp = () => {
-        const message = constructWhatsappMessage();
-        const url = `https://wa.me/50660115102?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-    }
-
     const testSelectorResults = document.querySelectorAll('[data-test-wa-me]');
 
     testSelectorResults.forEach((element) => {
