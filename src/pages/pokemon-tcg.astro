@@ -34,15 +34,6 @@ const otherImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/po
         document.querySelectorAll('[data-wishlist-count]')[0].textContent = wishlistArray.length.toString();
     }
 
-    const constructWhatsappMessage = () => {
-        let message = "Hola, me gustaria hacer una orden de productos de TCG. Los productos que me interesan son: \n";
-        wishlistArray.forEach((item, index) => {
-            message += `${index + 1}. ${item.imageLink}\n`;
-        });
-
-        return message;
-    }
-
     const testSelectorResults = document.querySelectorAll('[data-test-wa-me]');
 
     testSelectorResults.forEach((element) => {

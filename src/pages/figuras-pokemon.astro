@@ -16,7 +16,7 @@ const products = await getCollection('products');
                         {product.data.image && (
                             <Image 
                                 src={product.data.image} 
-                                alt={product.data.title || product.slug} 
+                                alt={product.data.title || product.slug || ""} 
                                 class="w-full h-auto rounded-lg shadow-md object-cover"
                             />
                         )}

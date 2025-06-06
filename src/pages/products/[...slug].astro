@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Prose from '../../components/Prose.astro';
 
-import ProductTemplate from './productTemplate.astro';
+import ProductTemplate from '../../layouts/ProductLayout.astro';
 
 export async function getStaticPaths() {
 	const products = await getCollection('products');
