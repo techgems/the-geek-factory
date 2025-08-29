@@ -6,7 +6,8 @@ const products = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		image: image(),
-		price: z.number().positive()
+		price: z.number().positive(),
+		available: z.boolean().default(true)
 	})
 });
 

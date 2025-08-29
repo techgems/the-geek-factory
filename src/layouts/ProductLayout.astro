@@ -6,9 +6,7 @@ import "../styles/global.css";
 
 type Props = CollectionEntry<'products'>['data'];
 
-const { title, description, price, image } = Astro.props;
-
-console.log(title);
+const { title, description, price, image, available } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,7 +17,7 @@ console.log(title);
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{title} - {!available ? "No Disponible" : ""}</title>
 	</head>
 	<body>
 		<Header />
@@ -29,7 +27,7 @@ console.log(title);
             </div>
             <div>
                 <h2 class="text-4xl font-bold my-8">
-                    <span class="text-gradient bg-gradient-to-r from-white to-red-600">{title}</span> 
+                    <span class="text-gradient bg-gradient-to-r from-white to-red-600">{title} - {!available ? "No Disponible" : ""}</span> 
                 </h2>
                 <p class="text-xl font-semibold text-red-500">{description}</p>
 

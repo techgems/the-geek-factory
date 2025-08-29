@@ -5,12 +5,20 @@ import Layout from '../layouts/Layout.astro';
 
 // Fetch all products from the 'pokemon-figurines' collection
 const products = await getCollection('products');
+
+const pokemonFigures = products.filter(product => 
+    product.slug.includes('pokemon-figures') && product.data.available
+);
+
 ---
 
 <Layout title="The Geek Factory">
     <div class="mx-auto w-full max-w-6xl text-white mt-8 px-2">
         <div class="flex flex-wrap gap-4 sm:gap-6 md:gap-8 justify-center">
-            {products.map(product => (
+            <h1 class="text-4xl text-center mb-8 w-full">
+                Figuras de Pokemon
+            </h1>
+            {pokemonFigures.map(product => (
                 <article class="w-full max-w-xs sm:w-52 text-center flex flex-col items-center">
                     <a href={`/products/${product.slug}/`} class="block w-full">
                         {product.data.image && (

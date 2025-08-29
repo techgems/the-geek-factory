@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const numerosVendidos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numerosTotales = Array.from({ length: 100 }, (_, i) => i + 1);
+
+const numerosDisponibles = numerosTotales.filter(num => !numerosVendidos.includes(num));
+---
+
+<script>
+  const constructWhatsappMessage = () => {
+    let message = "Hola, me gustaria comprar números para la rifa de los Eeveelutions EX.";
+    return message;
+  }
+
+  const sendToWhatsapp = () => {
+    const message = constructWhatsappMessage();
+    const url = `https://wa.me/50660115102?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  const buttons = document.querySelectorAll('#whatsapp-eeveelutions');
+
+  // Handle clicks on each button.
+  buttons.forEach((button) => {
+    button.addEventListener('click', sendToWhatsapp);
+  });
+</script>
+
+<Layout title="Rifa Colección Eeveelutions EX">
+    <h1>🎉✨ Gran Rifa Pokémon: ¡Colección Completa de Eeveelutions EX! ✨🎉</h1>
+
+    <p>¿Listo para llevarte un tesoro único de Prismatic Evolutions? Estamos rifando un set completo de 9 cartas EX de Eeveelutions (sí, ¡todas!), cada una con su protector para mantenerlas impecables. Además, incluimos un soporte resistente y portátil, diseñado especialmente para exhibir la colección completa como se merece. 🃏🔥</p>
+
+<!--Pictures in Grid Here -->
+
+
+    <h2>📌 Detalles de la rifa:</h2>
+    <ul>
+      <li>🎟️ Valor por número: 1500 Colones</li>
+      <li>📊 Total de espacios: 100</li>
+      <li>📅 Fecha del sorteo: Una vez vendidos todos los números.</li>
+    </ul>
+
+    <h2>Premios</h2>
+    <ul>
+      <li>🎁 Set completo de 9 Eeveelutions EX + Protectores Acrílicos + Stand Portátil para exhibición</li>
+      <li>🎁 Deckbox Ultra Resistente para 4 Decks de Team Rocket</li>
+      <li>🎁 1 Binder de anillos lleno de cartas Trainer (Supporter, Items, Stadiums)</li>
+      <li>🎁 1 Binder de anillos con diseño de Pokebola junto con un paquete de fundas VaultX para 9 cartas</li>
+      <li>🎁 1 Binder Ultra Pro Cosido lleno de Cartas de Pokemon EX</li>
+      <li>🎁 1 Deck de Charizard EX con holos de liga</li>
+      <li>🎁 1 Deck de Dragapult EX con holos de liga</li>
+      <li>🎁 1 Deck de Crobat EX del equipo Rocket</li>
+      <li>🎁 4 cajas de Bulk de las siguientes expansiones: Shrouded Fable, Stellar Crown, Surging Sparks y Prismatic Evolutions para un total de más de 1000 cartas.</li>
+    </ul>
+
+<!--Lista de numeros disponibles -->
+<ul>
+  {numerosDisponibles.map(num => (
+    <li>{num}</li>
+  ))}
+</ul>
+
+<p>No pierdas la oportunidad de ganar esta joya para tu colección por solo 500 colones. 💎
+
+👉 ¡Aparta tu número ya y asegúrate tu lugar en la rifa antes de que se acaben!
+
+    <!--Botón de Contactar por Whatsapp con texto.-->
+    <button id="whatsapp-eeveelutions" class="rounded-md font-semibold bg-red-600 py-3 px-5 mt-8  hover:bg-red-700 transition duration-300 ease-in-out">
+        Contactar por Whatsapp
+    </button>
+</p>
+
+</Layout>
