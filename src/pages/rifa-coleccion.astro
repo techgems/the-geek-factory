@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+
+const numerosVendidos: number[] = [];
+const numerosTotales = Array.from({ length: 100 }, (_, i) => i + 1);
+
+const numerosDisponibles = numerosTotales.filter(num => !numerosVendidos.includes(num));
+
+const rifaImages = import.meta.glob<{ default: ImageMetadata }>('/src/content/products/rifa/*.jpg', { eager: true });
+const rifaImageList = Object.values(rifaImages);
+---
+
+<script>
+  const constructWhatsappMessage = () => {
+    let message = "Hola, me gustaria comprar números para la rifa de la colección.";
+    return message;
+  }
+
+  const sendToWhatsapp = () => {
+    const message = constructWhatsappMessage();
+    const url = `https://wa.me/50660115102?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  const buttons = document.querySelectorAll('#whatsapp-eeveelutions');
+
+  // Handle clicks on each button.
+  buttons.forEach((button) => {
+    button.addEventListener('click', sendToWhatsapp);
+  });
+</script>
+
+<Layout title="Rifa Colección - Retiro Pokemon">
+  <section class="max-w-3xl mx-auto py-10">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-center text-red-500 mb-6">🎉✨ Gran Rifa Pokémon: ¡Colección Completa! ✨🎉</h1>
+
+    <p class="text-lg md:text-xl text-white mb-8 text-center">Estoy rifando mi colección de cartas Pokémon jugables por motivos migratorios. ¡No te pierdas esta oportunidad unica! 🃏🔥</p>
+
+    <div class="bg-zinc-800 rounded-xl shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-red-500 mb-4 flex items-center gap-2">Detalles de la rifa</h2>
+      <ul class="list-disc list-inside space-y-1 text-white">
+        <li>🎟️ Valor por número: <span class="font-semibold text-green-500">1500 Colones</span></li>
+        <li>📊 Total de espacios: <span class="font-semibold text-green-500">100</span></li>
+        <li>📅 Fecha del sorteo: Una vez vendidos todos los números.</li>
+      </ul>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      {rifaImageList.map((rifa) => (
+        <Image
+          src={rifa.default} 
+          alt="Imagen de rifa" 
+          class="h-auto max-w-full rounded-2 rounded-lg shadow-lg"
+        />
+      ))}
+    </div>
+
+    <div class="bg-zinc-800 rounded-xl shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Premios</h2>
+      <ul class="list-disc list-inside space-y-1 text-white">
+        <li class="font-bold text-red-500">Set completo de 9 Eeveelutions EX + Protectores Acrílicos + Stand Portátil para exhibición</li>
+        <li class="font-bold text-red-500">Deckbox Ultra Resistentes con arte de Zeraora y Team Rocket</li>
+        <li>1 Binder de anillos lleno de cartas Trainer (Supporter, Items, Stadiums)</li>
+        <li>1 Binder de anillos con diseño de Pokebola junto con un paquete de fundas VaultX para 9 cartas</li>
+        <li>1 Binder Ultra Pro Cosido lleno de Cartas de Pokemon EX</li>
+        <li class="font-bold text-red-500">1 Deck Completo de Archaludon EX con holos de liga</li>
+        <li class="font-bold text-red-500">1 Deck Completo de Greninja EX con holos de liga</li>
+        <li>Base Deck de Crobat EX del equipo Rocket (50 Cartas)</li>
+        <li>Base Deck Charizard EX y Dragapult EX (50 Cartas)</li>
+        <li class="font-bold">5 cajas de Bulk de las siguientes expansiones: Shrouded Fable, Stellar Crown, Surging Sparks, Twilight Masquerade y Prismatic Evolutions para un total de más de 1000 cartas.</li>
+      </ul>
+    </div>
+
+    <div class="bg-zinc-800 rounded-xl shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-red-500 mb-4 text-center">Números disponibles</h2>
+      <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 gap-2 p-4">
+        {numerosDisponibles.map(num => (
+          <div class="text-center py-2 rounded font-bold text-gray-800 bg-green-400 border border-green-800 hover:bg-green-200 transition cursor-pointer select-none">{num}</div>
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-zinc-100 rounded-xl shadow-lg p-6 text-center">
+      <p class="text-lg font-medium text-gray-800 mb-2">No pierdas la oportunidad de ganar esta colección completa por solo <span class="text-green-700 font-bold">1500 colones</span>!</p>
+      <p class="mb-4">👉 ¡Aparta tu número ya y asegúrate tu lugar en la rifa antes de que se acaben!</p>
+      <!--Botón de Contactar por Whatsapp con texto.-->
+      <button id="whatsapp-eeveelutions" class="rounded-md font-semibold bg-green-600 text-white py-3 px-8 mt-4 shadow-lg hover:bg-green-700 transition duration-300 ease-in-out text-lg flex items-center gap-2 mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0 5.385 4.365 9.75 9.75 9.75 1.7 0 3.3-.425 4.7-1.175l3.3.925a.75.75 0 00.925-.925l-.925-3.3A9.708 9.708 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12z" /></svg>
+        Contactar por Whatsapp
+      </button>
+    </div>
+  </section>
+</Layout>
