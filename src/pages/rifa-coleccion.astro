@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from 'astro:assets';
 
-const numerosVendidos: number[] = [];
+const numerosVendidos: number[] = [91, 84, 85, 86];
 const numerosTotales = Array.from({ length: 100 }, (_, i) => i + 1);
 
 const numerosDisponibles = numerosTotales.filter(num => !numerosVendidos.includes(num));
